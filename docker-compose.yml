@@ -1,0 +1,17 @@
+services:
+
+  backend:
+    image: fraude-backend:1.0
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    image: fraude-frontend:1.0
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      API_URL: http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
